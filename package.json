@@ -5,7 +5,10 @@
     "type": "module",
     "main": "server.js",
     "scripts": {
-        "start": "node backend/server.js"
+        "start": "node backend/server.js",
+        "server": "nodemon backend/server.js",
+        "client": "npm start --prefix frontend",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
     },
     "author": "Ken Sagala / ksykko",
     "license": "MIT",
@@ -14,6 +17,7 @@
     },
     "devDependencies": {
         "concurrently": "^8.2.0",
+        "dotenv": "^16.3.1",
         "nodemon": "^3.0.1"
     }
 }
