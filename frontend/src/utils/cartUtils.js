@@ -1,3 +1,7 @@
+/* 
+    This file contains functions that are used to calculate the cart total price.
+*/
+
 export const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
 }
