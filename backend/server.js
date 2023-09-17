@@ -12,6 +12,7 @@ import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 import productRoutes from './routes/product.routes.js'
+import userRoutes from './routes/user.routes.js'
 
 const port = process.env.PORT || 5000
 
@@ -25,6 +26,8 @@ app.get('/', (req, res) => {
 
 // This uses the routes from backend\routes\product.routes.js for the /api/products route
 app.use('/api/products', productRoutes)
+// This uses the routes from backend\routes\user.routes.js for the /api/users route
+app.use('/api/users', userRoutes)
 
 // This is used to handle errors
 app.use(notFound)
