@@ -21,7 +21,7 @@ const importData = async () => {
         await Product.deleteMany() // Delete all products in the database
         await User.deleteMany() // Delete all users in the database
 
-        const createdUsers = await User.insertMany(users) // Insert all users in the database
+        const createdUsers = await User.insertMany(users) //* Insert all users in the database
         const adminUser = createdUsers[0]._id // Get the first user in the database (admin user)
 
         const sampleProducts = products.map((product) => {
@@ -31,7 +31,7 @@ const importData = async () => {
             }
         })
 
-        await Product.insertMany(sampleProducts) // Insert all products in the database (with the admin user)
+        await Product.insertMany(sampleProducts) //* Insert all products in the database (with the admin user)
         console.log('Data Imported!'.green.inverse)
         process.exit()
     } catch (error) {
