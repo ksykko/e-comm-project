@@ -1,0 +1,48 @@
+/* 
+    This file contains the middleware for authentication. 
+    It is used to protect routes from unauthorized access.
+*/
+
+import jwt from 'jsonwebtoken'
+import asyncHandler from './asyncHandler.js'
+import User from '../models/user.model.js'
+
+// Protect routes
+const protect = asyncHandler(async (req, res, next) => {
+    let token
+
+    // Read the JWT from the cookie
+    token = req.cookies.jwt
+
+    if (token) {
+        try {
+            // Verify the token
+            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+            // Find the user by the id from the decoded token and attach it to the request object
+            req.user = await User.findById(decoded.userId).select('-password')
+
+            next()
+        } catch (error) {
+            console.error(error)
+
+            res.status(401)
+            throw new Error('Not authorized, token failed')
+        }
+    } else {
+        res.status(401)
+        throw new Error('Not authorized, no token')
+    }
+})
+
+// Admin middleware
+const admin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next()
+    } else {
+        res.status(401)
+        throw new Error('Not authorized as an admin')
+    }
+}
+
+export { protect, admin }
