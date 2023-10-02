@@ -16,6 +16,8 @@ import productRoutes from './routes/product.routes.js'
 import userRoutes from './routes/user.routes.js'
 import orderRoutes from './routes/order.routes.js'
 
+app.get('/api/config/paypal', (req, res) => res.send({ clientId: process.env.PAYPAL_CLIENT_ID }))
+
 const port = process.env.PORT || 5000
 
 connectDB() // Connect to MongoDB
