@@ -14,6 +14,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 import productRoutes from './routes/product.routes.js'
 import userRoutes from './routes/user.routes.js'
+import orderRoutes from './routes/order.routes.js'
 
 const port = process.env.PORT || 5000
 
@@ -32,10 +33,9 @@ app.get('/', (req, res) => {
     res.send('API is running...')
 })
 
-// This uses the routes from backend\routes\product.routes.js for the /api/products route
 app.use('/api/products', productRoutes)
-// This uses the routes from backend\routes\user.routes.js for the /api/users route
 app.use('/api/users', userRoutes)
+app.use('/api/orders', orderRoutes)
 
 // This is used to handle errors
 app.use(notFound)
