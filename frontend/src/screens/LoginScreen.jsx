@@ -40,6 +40,7 @@ const LoginScreen = () => {
             navigate(redirect)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
+            console.log(error)
         }
     }
 
