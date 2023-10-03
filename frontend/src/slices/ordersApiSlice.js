@@ -17,7 +17,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
             keepUnusedDataFor: 5, // Keep the data for 5 seconds even if it is not used (to avoid unnecessary requests)
         }),
         payOrder: builder.mutation({
-            query: (orderId, details) => ({
+            query: ({ orderId, details }) => ({
                 url: `${ORDERS_URL}/${orderId}/pay`,
                 method: 'PUT',
                 body: { ...details },
