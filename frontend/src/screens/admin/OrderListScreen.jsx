@@ -51,6 +51,13 @@ const OrderListScreen = () => {
                                         <FaTimes style={{ color: 'red' }} />
                                     )}
                                 </td>
+                                <td>
+                                    <LinkContainer to={`/order/${order._id}`}>
+                                        <Button variant='light' className='btn-sm'>
+                                            Details
+                                        </Button>
+                                    </LinkContainer>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
