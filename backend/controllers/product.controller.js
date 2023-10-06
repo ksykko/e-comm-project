@@ -8,7 +8,7 @@ import Product from '../models/product.model.js'
 // @desc Fetch all products
 // @route GET /api/products
 // @access Public
-const getProducts = asyncHandler(async(req, res) => {
+const getProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({}) // Get all products
 
     res.json(products)
@@ -17,7 +17,7 @@ const getProducts = asyncHandler(async(req, res) => {
 // @desc Fetch single product
 // @route GET /api/products/:id
 // @access Public
-const getProductById = asyncHandler(async(req, res) => {
+const getProductById = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id) // Get product by ID
 
     if (product) {
@@ -31,7 +31,7 @@ const getProductById = asyncHandler(async(req, res) => {
 // @desc Create a product
 // @route POST /api/products
 // @access Private/Admin
-const createProduct = asyncHandler(async(req, res) => {
+const createProduct = asyncHandler(async (req, res) => {
     const product = new Product({
         name: 'Sample product',
         price: 0,
@@ -48,4 +48,29 @@ const createProduct = asyncHandler(async(req, res) => {
     res.status(201).json(createdProduct)
 })
 
-export { getProducts, getProductById, createProduct }
+// @desc Update a product
+// @route PUT /api/products/:id
+// @access Private/Admin
+const updateProduct = asyncHandler(async (req, res) => {
+    const { name, price, description, image, brand, category, countInStock } = req.body
+
+    const product = await Product.findById(req.params.id)
+
+    if (product) {
+        product.name = name
+        product.price = price
+        product.description = description
+        product.image = image
+        product.brand = brand
+        product.category = category
+        product.countInStock = countInStock
+
+        const updatedProduct = await product.save()
+        res.json(updatedProduct)
+    } else {
+        res.status(404) // Set the status to 404
+        throw new Error('Product not found') // Throw an error
+    }
+})
+
+export { getProducts, getProductById, createProduct, updateProduct }
