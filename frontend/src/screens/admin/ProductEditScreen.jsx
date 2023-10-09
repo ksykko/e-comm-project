@@ -24,8 +24,7 @@ const ProductEditScreen = () => {
 
     const { data: product, isLoading, error, refetch } = useGetProductDetailsQuery(productId)
 
-    const [updateProduct, { isLoading: loadingUpdate, error: updateError }] =
-        useUpdateProductMutation()
+    const [updateProduct, { isLoading: loadingUpdate }] = useUpdateProductMutation()
 
     const [uploadProductImage, { isLoading: loadingUpload }] = useUploadProductImageMutation()
 
@@ -62,6 +61,7 @@ const ProductEditScreen = () => {
             toast.error(result.error)
         } else {
             toast.success('Product updated')
+            refetch()
             navigate('/admin/productlist')
         }
     }

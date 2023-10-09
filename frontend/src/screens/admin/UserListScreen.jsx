@@ -8,6 +8,7 @@ import { useGetUsersQuery, useDeleteUserMutation } from '../../slices/usersApiSl
 
 const UserListScreen = () => {
     const { data: users, isLoading, error, refetch } = useGetUsersQuery()
+    console.log(users)
 
     const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation()
 
@@ -61,7 +62,7 @@ const UserListScreen = () => {
                                 </td>
 
                                 <td>
-                                    <LinkContainer to={`admin/user/${user._id}/edit`}>
+                                    <LinkContainer to={`/admin/user/${user._id}/edit`}>
                                         <Button variant='light' className='btn-sm'>
                                             <FaEdit />
                                         </Button>
