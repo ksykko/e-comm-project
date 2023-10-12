@@ -9,8 +9,11 @@ import { apiSlice } from './apiSlice'
 export const productsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getProducts: builder.query({
-            query: () => ({
+            query: ({ pageNumber }) => ({
                 url: PRODUCTS_URL,
+                params: {
+                    pageNumber,
+                },
             }),
             providesTags: ['Product'], // This tag will be used to invalidate the cache when the createProduct or updateProduct mutation is called
             keepUnusedDataFor: 5, // Keep the data for 5 seconds
